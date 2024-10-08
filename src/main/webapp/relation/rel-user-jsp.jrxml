@@ -79,7 +79,6 @@
 				<element kind="textField" uuid="3e79a724-528d-4d90-a532-03de38dbed33" x="310" y="0" width="270" height="18" pattern="dd/MM/yyyy" blankWhenNull="true">
 					<expression><![CDATA[$F{dataNascimento}]]></expression>
 				</element>
-				<element kind="line" uuid="fcabe192-63cc-4f50-b91c-7f7c5f562c2a" x="-20" y="18" width="590" height="1"/>
 			</band>
 		</groupHeader>
 	</group>
