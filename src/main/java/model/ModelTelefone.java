@@ -1,8 +1,12 @@
 package model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
 public class ModelTelefone implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -11,8 +15,10 @@ public class ModelTelefone implements Serializable {
 	
 	private Long id;
 	private String numero;
-	
+
+	@ManyToOne
 	private ModelLogin usuario_pai_id;
+	@ManyToOne
 	private ModelLogin usuario_cad_id;
 
 	public Long getId() {

@@ -1,27 +1,29 @@
 package model;
 
+import jakarta.persistence.*;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class ModelLogin implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String login;
-	private String senha;
-	private String email;
+
 	private String nome;
-	private String perfil;
+	private String sobrenome;
+	private String cpf;
 	private String sexo;
-	
-	private String fotoUser;
-	private String extensaofotouser;
-	
+	private Date dataNascimento;
+
 	private String cep;
 	private String logradouro;
 	private String bairro;
@@ -29,24 +31,13 @@ public class ModelLogin implements Serializable {
 	private String cidade;
 	private String uf;
 	private String numero;
-	
-	private boolean userAdmin;
 
-	private Date dataNascimento;
-	private Double rendamensal;
 
+	private Double rendaMensal;
+
+	@OneToMany
 	private List<ModelTelefone> telefones = new ArrayList<ModelTelefone>();
 
-
-
-
-	public boolean getUserAdmin() {
-		return userAdmin;
-	}
-
-	public void setUserAdmin(boolean useradmin) {
-		this.userAdmin = useradmin;
-	}
 
 	public boolean isNovo() {
 
@@ -67,14 +58,6 @@ public class ModelLogin implements Serializable {
 		this.id = id;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -83,55 +66,12 @@ public class ModelLogin implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-	public String getPerfil() {
-		return perfil;
-	}
-
-	public void setPerfil(String perfil) {
-		this.perfil = perfil;
-	}
-
 	public String getSexo() {
 		return sexo;
 	}
 
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
-	}
-
-	public String getFotoUser() {
-		return fotoUser;
-	}
-
-	public void setFotoUser(String fotoUser) {
-		this.fotoUser = fotoUser;
-	}
-
-	public String getExtensaofotouser() {
-		return extensaofotouser;
-	}
-
-	public void setExtensaofotouser(String extensaofotouser) {
-		this.extensaofotouser = extensaofotouser;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 	public String getCep() {
@@ -156,14 +96,6 @@ public class ModelLogin implements Serializable {
 
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
-	}
-
-	public String getLocalidade() {
-		return localidade;
-	}
-
-	public void setLocalidade(String localidade) {
-		this.localidade = localidade;
 	}
 
 	public String getCidade() {
@@ -198,13 +130,6 @@ public class ModelLogin implements Serializable {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public Double getRendamensal() {
-		return rendamensal;
-	}
-
-	public void setRendamensal(Double rendamensal) {
-		this.rendamensal = rendamensal;
-	}
 
 	public List<ModelTelefone> getTelefones() {
 		return telefones;

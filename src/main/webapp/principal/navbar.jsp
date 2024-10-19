@@ -12,13 +12,15 @@
                               <div class="main-search morphsearch-search">
                                   <div class="input-group">
                                       <span class="input-group-addon search-close"><i class="ti-close"></i></span>
-                                      <input type="text" class="form-control" placeholder="Enter Keyword">
+                                      <label>
+                                          <input type="text" class="form-control" placeholder="Enter Keyword">
+                                      </label>
                                       <span class="input-group-addon search-btn"><i class="ti-search"></i></span>
                                   </div>
                               </div>
                           </div>
                       </div>
-                      <a href="index.html">
+                      <a href="">
                           <img class="img-fluid" src="<%= request.getContextPath() %>/assets/images/logo.png" alt="Theme-Logo" />
                       </a>
                       <a class="mobile-options waves-effect waves-light">
@@ -41,14 +43,14 @@
                               </div>
                           </li>
                           <li>
-                              <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
+                              <a href="#" onclick="toggleFullScreen()" class="waves-effect waves-light">
                                   <i class="ti-fullscreen"></i>
                               </a>
                           </li>
                       </ul>
                       <ul class="nav-right">
                           <li class="header-notification">
-                              <a href="#!" class="waves-effect waves-light">
+                              <a href="#" class="waves-effect waves-light">
                                   <i class="ti-bell"></i>
                                   <span class="badge bg-c-red"></span>
                               </a>
@@ -102,17 +104,17 @@
                                       </a>
                                   </li>
                                   <li class="waves-effect waves-light">
-                                      <a href="user-profile.html">
+                                      <a href="">
                                           <i class="ti-user"></i> Profile
                                       </a>
                                   </li>
                                   <li class="waves-effect waves-light">
-                                      <a href="email-inbox.html">
+                                      <a href="">
                                           <i class="ti-email"></i> My Messages
                                       </a>
                                   </li>
                                   <li class="waves-effect waves-light">
-                                      <a href="auth-lock-screen.html">
+                                      <a href="">
                                           <i class="ti-lock"></i> Lock Screen
                                       </a>
                                   </li>
