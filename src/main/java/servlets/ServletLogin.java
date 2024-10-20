@@ -16,18 +16,20 @@ import model.ModelLogin;
 public class ServletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	private DAOLoginRepository daoLoginRepository = new DAOLoginRepository();
-	private DAOUsuarioRepository daoUsuarioRepository = new DAOUsuarioRepository();
+	private final DAOLoginRepository daoLoginRepository = new DAOLoginRepository();
+	private final DAOUsuarioRepository daoUsuarioRepository = new DAOUsuarioRepository();
 	
     public ServletLogin() {
         ;
     }
 
 	/*Recebe os dados pela url em parametros*/
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String acao = request.getParameter("acao");
 		
-		if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("logout")) {
+		if (acao != null && acao.equalsIgnoreCase("logout")) {
 			
 			request.getSession().invalidate(); //invalidar a sessão
 			RequestDispatcher redirecionar = request.getRequestDispatcher("index.jsp");
@@ -39,7 +41,8 @@ public class ServletLogin extends HttpServlet {
 	}
 
 	/*Recebe os dados enviados por um formulario*/
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
@@ -59,28 +62,30 @@ public class ServletLogin extends HttpServlet {
 						
 						request.getSession().setAttribute("usuario", modelLogin.getLogin());
 						request.getSession().setAttribute("perfil", modelLogin.getPerfil());
-						request.getSession().setAttribute("imagemUser", modelLogin.getFotoUser());
-						
+
 						if (url == null || url.equals("null")) {
-							url = "principal/principal.jsp";
+							url = "principal/dashboard.jsp";
 						}
 						
 						RequestDispatcher redirecionar = request.getRequestDispatcher(url);
 						redirecionar.forward(request, response);
 						
 					}else {
+
 						RequestDispatcher redirecionar = request.getRequestDispatcher("/index.jsp");
 						request.setAttribute("msg", "Informe o login e senha corretamente!");
 						redirecionar.forward(request, response);
 					}
 					
 				}else {
+
 					RequestDispatcher redirecionar = request.getRequestDispatcher("index.jsp");
 					request.setAttribute("msg", "Informe o login e senha corretamente!");
 					redirecionar.forward(request, response);
 				}
 		
 		}catch (Exception e) {
+
 			e.printStackTrace();
 			RequestDispatcher redirecionar = request.getRequestDispatcher("erro.jsp");
 			request.setAttribute("msg", e.getMessage());

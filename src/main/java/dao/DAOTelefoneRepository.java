@@ -10,74 +10,88 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DAOTelefoneRepository {
-	DAOUsuarioRepository usuarioRepository = new DAOUsuarioRepository();
-	private Connection connection;
-	
-	public DAOTelefoneRepository() {
-		connection = SingleConnectionBanco.getConnection();
 
-	}
+    DAOUsuarioRepository usuarioRepository = new DAOUsuarioRepository();
 
-	public List<ModelTelefone> listFone (Long idUserPai) throws Exception{
-		List<ModelTelefone> retorno = new ArrayList<ModelTelefone>();
+    private final Connection connection;
 
-		String sql = "select * from telefone where usuario_pai_id = ?";
-		PreparedStatement ps = connection.prepareStatement(sql);
-		ps.setLong(1, idUserPai);
 
-		ResultSet rs = ps.executeQuery();
-		while (rs.next()) {
-			ModelTelefone model = new ModelTelefone();
-			model.setId(rs.getLong("id"));
-			model.setNumero(rs.getString("numero"));
-			model.setUsuario_cad_id(usuarioRepository.consultaUsuarioID(rs.getLong("usuario_cad_id")));
-			model.setUsuario_pai_id(usuarioRepository.consultaUsuarioID(rs.getLong("usuario_pai_id")));
+    public DAOTelefoneRepository() {
+        connection = SingleConnectionBanco.getConnection();
 
-			retorno.add(model);
+    }
 
-		}
+    public List<ModelTelefone> listFone(Long idUserPai) throws Exception {
+
+        List<ModelTelefone> retorno = new ArrayList<ModelTelefone>();
+
+        String sql = " select * from telefone where usuario_pai_id = ? ";
+
+        PreparedStatement ps = connection.prepareStatement(sql);
+
+        ps.setLong(1, idUserPai);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+
+            ModelTelefone model = new ModelTelefone();
+
+            model.setId(rs.getLong("id"));
+            model.setNumero(rs.getString("numero"));
+            model.setUsuario_cad_id(usuarioRepository.consultaUsuarioID(rs.getLong("usuario_cad_id")));
+            model.setUsuario_pai_id(usuarioRepository.consultaUsuarioID(rs.getLong("usuario_pai_id")));
+
+            retorno.add(model);
+
+        }
 
         return retorno;
     }
 
-	public void gravaTelefone (ModelTelefone modelTelefone) throws Exception{
-		
-		String sql = "insert into telefone (numero, usuario_pai_id, usuario_cad_id) values (?,?,?)";
-		
-		PreparedStatement preparedStatement = connection.prepareStatement(sql);
-		preparedStatement.setString(1, modelTelefone.getNumero());
-		preparedStatement.setLong(2, modelTelefone.getUsuario_pai_id().getId());
-		preparedStatement.setLong(3, modelTelefone.getUsuario_cad_id().getId());
-		
-		preparedStatement.execute();
-		
-		connection.commit();
+    public void gravaTelefone(ModelTelefone modelTelefone) throws Exception {
 
-	}
+        String sql = "insert into telefone (numero, usuario_pai_id, usuario_cad_id) values (?,?,?)";
 
-	public void deleteFone (Long id) throws Exception{
-		String sql = "delete from telefone where id = ?";
-		
-		PreparedStatement preparedStatement = connection.prepareStatement(sql);
-		preparedStatement.setLong(1,id);
-		
-		preparedStatement.executeUpdate();
-		
-		connection.commit();
-	}
-	public boolean existeFone (String fone, Long idUse) throws Exception{
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-		String sql = "select count(1) > 0 as existe from telefone where usuario_pai_id = ? and numero = ?";
+        preparedStatement.setString(1, modelTelefone.getNumero());
+        preparedStatement.setLong(2, modelTelefone.getUsuario_pai_id().getId());
+        preparedStatement.setLong(3, modelTelefone.getUsuario_cad_id().getId());
 
-		PreparedStatement preparedStatement = connection.prepareStatement(sql);
-		preparedStatement.setLong(1, idUse);
-		preparedStatement.setString(2, fone);
+        preparedStatement.execute();
 
-		ResultSet rs = preparedStatement.executeQuery();
+        connection.commit();
 
-		rs.next();
+    }
 
-		return rs.getBoolean("existe");
+    public void deleteFone(Long id) throws Exception {
 
-	}
+        String sql = "delete from telefone where id = ?";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        preparedStatement.setLong(1, id);
+
+        preparedStatement.executeUpdate();
+
+        connection.commit();
+    }
+
+    public boolean existeFone(String fone, Long idUse) throws Exception {
+
+        String sql = "select count(1) > 0 as existe from telefone where usuario_pai_id = ? and numero = ?";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        preparedStatement.setLong(1, idUse);
+        preparedStatement.setString(2, fone);
+
+        ResultSet rs = preparedStatement.executeQuery();
+
+        rs.next();
+
+        return rs.getBoolean("existe");
+
+    }
 }

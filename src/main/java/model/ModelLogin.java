@@ -1,43 +1,90 @@
 package model;
 
-import jakarta.persistence.*;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
 public class ModelLogin implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	private String nome;
-	private String sobrenome;
-	private String cpf;
 	private String sexo;
 	private Date dataNascimento;
 
 	private String cep;
 	private String logradouro;
 	private String bairro;
-	private String localidade;
 	private String cidade;
 	private String uf;
 	private String numero;
 
 
-	private Double rendaMensal;
+	private String login;
+	private String senha;
+	private String email;
+	private boolean userAdmin;
+	private String perfil;
 
-	@OneToMany
+	private Double rendamensal;
+
 	private List<ModelTelefone> telefones = new ArrayList<ModelTelefone>();
 
+
+
+
+	public String getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
+	}
+
+	public Double getRendamensal() {
+		return rendamensal;
+	}
+
+	public void setRendamensal(Double rendamensal) {
+		this.rendamensal = rendamensal;
+	}
+
+	public boolean isUserAdmin() {
+		return userAdmin;
+	}
+
+	public void setUserAdmin(boolean userAdmin) {
+		this.userAdmin = userAdmin;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 
 	public boolean isNovo() {
 
@@ -130,7 +177,6 @@ public class ModelLogin implements Serializable {
 		this.dataNascimento = dataNascimento;
 	}
 
-
 	public List<ModelTelefone> getTelefones() {
 		return telefones;
 	}
@@ -138,7 +184,6 @@ public class ModelLogin implements Serializable {
 	public void setTelefones(List<ModelTelefone> telefones) {
 		this.telefones = telefones;
 	}
-
 
 	public String getMostraTelefoneRel() {
 
