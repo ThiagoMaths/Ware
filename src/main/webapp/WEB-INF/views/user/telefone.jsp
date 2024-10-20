@@ -6,28 +6,28 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<jsp:include page="head.jsp"></jsp:include>
+<jsp:include page="../../common/head.jsp"></jsp:include>
 
 
   <body>
-  <jsp:include page="theme-loader.jsp"></jsp:include>
+  <jsp:include page="../../common/theme-loader.jsp"></jsp:include>
   
   <!-- Pre-loader end -->
   <div id="pcoded" class="pcoded">
       <div class="pcoded-overlay-box"></div>
       <div class="pcoded-container navbar-wrapper">
        
-<jsp:include page="navbar.jsp"></jsp:include>
+<jsp:include page="../../common/navbar.jsp"></jsp:include>
 
           <div class="pcoded-main-container">
               <div class="pcoded-wrapper">
                
-               <jsp:include page="navbarmainmenu.jsp"></jsp:include>
+               <jsp:include page="../../common/navbarmainmenu.jsp"></jsp:include>
                
                   <div class="pcoded-content">
                       <!-- Page-header start -->
                       
-                      <jsp:include page="page-header.jsp"></jsp:include>
+                      <jsp:include page="../../common/page-header.jsp"></jsp:include>
                       
                       <!-- Page-header end -->
                         <div class="pcoded-inner-content">
@@ -80,7 +80,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <c:forEach items='${modelTelefones}' var='f'>
+                                            <c:forEach items='${modelTelefone}' var='f'>
                                                 <tr>
                                                     <td><c:out value="${f.id}"></c:out></td>
                                                     <td><c:out value="${f.numero}"></c:out></td>
@@ -102,7 +102,7 @@
             </div>
         </div>
     
-   <jsp:include page="javascriptfile.jsp"></jsp:include>
+   <jsp:include page="../../common/javascriptfile.jsp"></jsp:include>
   <script type="text/javascript">
       $("#numero").keypress(function (event) {
 
